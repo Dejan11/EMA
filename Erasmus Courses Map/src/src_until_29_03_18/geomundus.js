@@ -95,8 +95,7 @@ function hideNulls(str) {
 function colored(str){
   if (str === "NEW"){
 
-    // return "#FFFF00";
-    return "RoyalBlue";
+    return "#FFFF00";
 
     } else {
     return "#fa8072";
@@ -406,7 +405,7 @@ function renderListings(features) {
               map.setLayoutProperty('uni_select', 'visibility', 'visible');
  /*Highlight corresponding features on the map*/
               setTimeout(function() {
-                // item.style.color = 'rgba(250, 250, 250, 0.8)';
+                item.style.color = 'rgba(250, 250, 250, 0.8)';
                 item.textContent = prop.title;
                 item.style.fontWeight = 600;
                 item.style.borderRadius = 5 + 'px';
@@ -420,7 +419,7 @@ function renderListings(features) {
                                 '<div style ="display:inline; margin-left: 5px; opacity: 0.6; color:' +  colored(status) + ';"><i>' + hideNulls(status) + '</i></div>'+
                                 '<div style ="display:inline; margin-left: 5px; opacity: 0.6; color:#ff6666"><i>' + deprecated(ongoing) + '</i></div>';
                 item.style.fontWeight = 400;
-                // item.style.color = 'rgba(255, 255, 255, 0.9)';
+                item.style.color = 'rgba(255, 255, 255, 0.9)';
                 item.style.borderRadius = 0 + 'px';
               }, 50);
           });
@@ -429,7 +428,6 @@ function renderListings(features) {
       });
 /*Show the filter input*/
     filterEl.parentNode.style.display = 'block';
-    filterEl.parentNode.style.color = 'rgb(117,117,117)';
     } else if (features.length && city.className === 'mode-selected' ) {
 // we want to know wich options are selected in order to obtain count for programs per cities
         programChecked = $('input[name=program]:checked').val(); 
@@ -495,15 +493,11 @@ listingEl.appendChild(item);
         document.getElementById('dropbtn').textContent = 'Degree'
         document.getElementById('ongoing').textContent = 'Status'
         }
-        var empty_note = '<p><div>' + 'Drag map to populate list!' + '</div></p>';
-        if (listingEl.childElementCount==0 && filterEl.value!=""){
-          empty_note ='<p><div>' + 'Nothing found. Check spellings or try other text!' + '</div></p>';
-        }
-        
 
-        empty.innerHTML = empty_note
-        // empty.style.color = "rgba(245, 245, 245, 0.9)";
-        empty.style.color ='rgb(117,117,117)';
+        var variable1 = '<p><div>' + 'Drag map to populate list!' + '</div></p>';
+
+        empty.innerHTML = variable1
+        empty.style.color = "rgba(245, 245, 245, 0.9)";
         empty.style.textAlign = "center";
         empty.id="appended-p";
         empty.textAlign = "center";
@@ -511,7 +505,8 @@ listingEl.appendChild(item);
         listingEl.appendChild(empty);
 
 /*Hide the filter input*/
-        // filterEl.parentNode.style.display = 'none';
+        filterEl.parentNode.style.display = 'none';
+
   }
 }
 
@@ -647,13 +642,13 @@ $('#program, #city, #radio1, #radio2, #radio3, #radio4, #radio5, #radio6, #inter
 $('#city').click(function(){
   $("#program").attr('class','mode');
   $("#city").attr('class','mode-selected');
-  ff.placeholder = '🔍 Search results typing city name';
+  ff.placeholder = '🔍 Filter results by city name';
   populateListing("city",100);
 });
 $('#program').click(function(){
   $("#program").attr('class', 'mode-selected');
   $("#city").attr('class','mode');
-  ff.placeholder = '🔍  Search results typing program or key word';
+  ff.placeholder = '🔍 Filter results by program or abbreviation name';
   populateListing("code",100);
 });
 

@@ -152,7 +152,7 @@ right: 0px;
 margin-top: 20px;
 margin-right: 20px;
 margin-left: 10px;
-/* float: right; */
+float: right;
 top: 0px;
 width: 38px;
 height: 38px;
@@ -260,39 +260,19 @@ cursor: pointer;
 opacity: 1;
 }
 
-/*#ema_title {
+#ema_title {
 display: none;
-border-radius: 10px;
 position: absolute;
-left: 55%;
-bottom: 1%;
+left: 49%;
+top: 1%;
+right: 25%;
 color: white;
 width: 300px;
-height: 72px;
-opacity: .9;
+height: 125px;
+opacity: .7;
 text-align:center;
 z-index:1;
-}*/
-#ema_title {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  background-color: #ddd;
-  text-align: center;
-  padding: 10px 80px;
-  color: rgb(0, 78, 134)
 }
-
-/* cellpadding */
-#ema_title th, td { padding: 0px;}
-
-/* cellspacing*/
-#ema_title table { border-collapse: separate; border-spacing: 0px; } /* cellspacing="0" */
-#ema_title table { border-collapse: collapse; border-spacing: 0; }   /* cellspacing="0" */
-
-
-
 #banner{
 display: none;
 position: fixed;
@@ -344,7 +324,7 @@ position: absolute;
 /*background-color: rgba(220, 220, 220, 1);*/
 z-index: 3;
 border-radius: 5px;
-top: 60px;
+top: 10px;
 left: 26%;
 height: 35px;
 width: 35px;
@@ -380,7 +360,7 @@ position: absolute;
 background-color: rgba(240, 240, 240, 1);
 z-index: 2;
 border-radius: 20px;
-top: 10px;
+top: 60px;
 left: 26%;
 height: 35px;
 width: 35px;
@@ -469,7 +449,6 @@ background: '#ff4b1f';
 }
 
 #modes {
-  background-color: #ddd;
   /* margin-left: 15px; */
   display: flex;
   z-index: 1;
@@ -523,44 +502,36 @@ background: rgba(70, 70, 70, 1);
   left: 0;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
-  /* background-color: rgba(12, 12, 12, 0.7); */
-  background-color: #fff;
+  background-color: rgba(12, 12, 12, 0.7);
   max-height: 100%;
   overflow: hidden;
-
 }
 
 .map-overlay fieldset {
   display: none;
   z-index: 2;
-  /* background: rgba(12, 12, 12, 0.7); */
-  background: #ddd;
+  background: rgba(12, 12, 12, 0.7);
   border: none;
   padding: 10px;
   margin: 0;
-  /* color: rgba(255, 255, 255, 0.9); */
-
-
-
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .map-overlay input {
-
   display: block;
   z-index: 2;
   border-bottom: 2px solid;
-  font: bold 12px Arial,Helvetica,Sans-serif;
+font: bold 12px Arial,Helvetica,Sans-serif;
   width: 100%;
   border-radius: 20px;
-  /* background: rgba(12, 12, 12, 0.7); */
-  /* padding: 5px 10px 5px 25px; */
+  background: rgba(12, 12, 12, 0.7);
+  padding: 5px 10px 5px 25px;
   margin-top: 5px;
-  padding: 10px;  
 }
 
 .map-overlay .listing {
   overflow: auto;
-  max-height: calc(100% - 175px);
+  max-height: 90%;
 
 }
 
@@ -572,11 +543,9 @@ background: rgba(70, 70, 70, 1);
 }
 
 .map-overlay .listing a {
-  /* border-bottom: 1px solid rgba(0, 128, 225, 0.3); */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  /* color: rgba(255, 255, 255, 0.9); */
-  /* background: rgba(12, 12, 12, 0.7); */
-  color:#404;
+  border-bottom: 1px solid rgba(0, 128, 225, 0.3);
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(12, 12, 12, 0.7);
   text-decoration: none;
 }
 
@@ -585,8 +554,7 @@ background: rgba(70, 70, 70, 1);
 }
 
 .map-overlay .listing a:hover {
-  /* background: rgba(0, 128, 225, 0.3); */
-  background: #f0f0f0;
+  background: rgba(0, 128, 225, 0.3);
   cursor: pointer;
 }
 
