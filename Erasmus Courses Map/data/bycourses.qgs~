@@ -5,7 +5,7 @@
   <evaluateDefaultValues active="0"/>
   <layer-tree-group expanded="1" checked="Qt::Checked" name="">
     <customproperties/>
-    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="countryNEW20180327191625787" source="D:/Student Organisations/EMA/EMA/Erasmus Courses Map/src/countryNEW.geojson" name="countryNEW countryNEW__ Polygon">
+    <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="countryNEW20180327191625787" source="D:/Student Organisations/EMA/EMA/Erasmus Courses Map/src/countryNEW.geojson" name="countryNEW ">
       <customproperties/>
     </layer-tree-layer>
     <layer-tree-layer expanded="1" providerKey="ogr" checked="Qt::Checked" id="countryNEW_BIS_27_03_1820180327191625827" source="D:/Student Organisations/EMA/EMA/Erasmus Courses Map/src/countryNEW_BIS_27.03.18.geojson" name="countryNEW_BIS_27.03.18">
@@ -53,7 +53,7 @@
     </custom-order>
   </layer-tree-canvas>
   <legend updateDrawingOrder="true">
-    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="countryNEW countryNEW__ Polygon" showFeatureCount="0">
+    <legendlayer drawingOrder="-1" open="true" checked="Qt::Checked" name="countryNEW " showFeatureCount="0">
       <filegroup open="true" hidden="false">
         <legendlayerfile isInOverview="0" layerid="countryNEW20180327191625787" visible="1"/>
       </filegroup>
@@ -311,7 +311,7 @@
       <keywordList>
         <value></value>
       </keywordList>
-      <layername>countryNEW countryNEW__ Polygon</layername>
+      <layername>countryNEW </layername>
       <srs>
         <spatialrefsys>
           <proj4>+proj=longlat +datum=WGS84 +no_defs</proj4>
@@ -1083,6 +1083,14 @@ def my_form_open(dialog, layer, feature):
       <DistanceUnits type="QString"></DistanceUnits>
       <AreaUnits type="QString"></AreaUnits>
     </Measurement>
+    <SemiAutomaticClassificationPlugin>
+      <bandSetPresent type="QString">No</bandSetPresent>
+      <bndSetWvLn type="QString">[]</bndSetWvLn>
+      <bndSetMultF type="QString">[]</bndSetMultF>
+      <bndSetUnit type="QString">band number</bndSetUnit>
+      <bandSet type="QString">[]</bandSet>
+      <bndSetAddF type="QString">[]</bndSetAddF>
+    </SemiAutomaticClassificationPlugin>
     <SpatialRefSys>
       <ProjectCRSProj4String type="QString">+proj=longlat +datum=WGS84 +no_defs</ProjectCRSProj4String>
       <ProjectCrs type="QString">EPSG:4326</ProjectCrs>

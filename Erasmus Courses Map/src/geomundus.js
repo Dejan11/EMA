@@ -544,6 +544,7 @@ map.on('load', function () {
           var xmax = features[0].properties.xmax;
           var ymax = features[0].properties.ymax;
           map.fitBounds([[ xmin, ymin], [xmax, ymax]]);
+          console.log(features[0].properties.code +";"+ xmin +";"+ ymin +";"+ xmax +";"+ ymax );
      }
   });
 
