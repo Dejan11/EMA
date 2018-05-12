@@ -633,6 +633,9 @@ overflow: auto;
 
 }
 
+.city-hover:hover{
+  font-weight: bold;
+}
 
 .link
 {

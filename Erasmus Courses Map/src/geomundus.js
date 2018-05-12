@@ -121,6 +121,7 @@ function selYear(code,selCol){
   return uniqueArray.sort(function(a, b){return a-b});
 }
 
+
 //string function
 function normalize(string) {
     return string.trim().toLowerCase();
@@ -432,77 +433,13 @@ function renderListings(features) {
 /*Show the filter input*/
     filterEl.parentNode.style.display = 'block';
     filterEl.parentNode.style.color = 'rgb(117,117,117)';
-    } /*else if (features.length && city.className === 'mode-selected' ) {
-// we want to know which options are selected in order to obtain count for programs per cities
-        programChecked = $('input[name=program]:checked').val(); 
-        statusChecked = $('input[name=status]:checked').val();
-        programChecked = (programChecked==="All") ? ["EMJD","EMJMD"] : (programChecked==="EMJMD") ? ["EMJMD"] : ["EMJD"];
-        statusChecked = (statusChecked === "All") ? [1,0] : (statusChecked === "1") ? [1] : [0];
-//City mode - populating the list
-        features.forEach(function(feature) {
-            var prop = feature.properties;
-            var lat = prop.lat;
-            var lon =  prop.lon;
-            var city =  prop.city;
-            //var cat =  prop.cat;
-            //var ongoing = prop.ongoing2015_2017;
-            // console.log(city, cat, ongoing);
-            var item = document.createElement('a');
-            //item.target = '_blank';
-            item.innerHTML = '<div style ="display:inline;">' + city + '</div>' +
-                              '<div style ="display:inline; margin-left: 5px; color: #5094e1;"><b>' + countProgramsPerCity(city, programChecked, statusChecked) + '</b></div>';
-
-//City mode - with mouse over the listings of the city show with red marker point on the map
-            item.addEventListener('mouseover', function(){
-              map.setFilter("uni_select",["==","city",city]);
-              map.setLayoutProperty("uni_select",'visibility','visible');
-            });
-//City mode - on click zoom fly to city and show red marker
-            item.addEventListener('click', function(){
-              map.flyTo({
-                center: [lon, lat],
-                zoom: 7
-              });
-              map.setFilter("point_animation", ["==", "city", city]);
-              map.setLayoutProperty('point_animation','visibility','visible');
-              map.setFilter("uni_icon",["==","city",city]);
-              map.setLayoutProperty("uni_icon",'visibility','visible');
-              map.setLayoutProperty('uni_icon','text-field',"");
-
-            });
-// City mode - adding city into listing that are in the map view 
-            item.addEventListener('mouseout', function() {
-            map.setLayoutProperty("uni_select", 'visibility', 'none');
-});
-            
-//City mode - populate listings after mouseover, click or mouseout were met
-listingEl.appendChild(item);
-
-}); 
-        
-//Show the filter input
-        filterEl.parentNode.style.display = 'block';
-
     } else {
-
+      //if filter not found, provide feedback to user
         var empty = document.createElement('p');
-        var bb = document.getElementById("program_title")
-        var city = document.getElementById('city');
-        var program = document.getElementById('program');
-        var country = document.getElementById('country');
-        if (city.className === 'mode-selected'){
-          console.log('citymode')
-        } else {
-
-        document.getElementById('dropbtn').textContent = 'Degree'
-        document.getElementById('ongoing').textContent = 'Status'
-        }
         var empty_note = '<p><div>' + 'Drag map to populate list!' + '</div></p>';
         if (listingEl.childElementCount==0 && filterEl.value!=""){
           empty_note ='<p><div>' + 'Nothing found. Check spellings or try other text!' + '</div></p>';
         }
-        
-
         empty.innerHTML = empty_note
         // empty.style.color = "rgba(245, 245, 245, 0.9)";
         empty.style.color ='rgb(117,117,117)';
@@ -511,11 +448,67 @@ listingEl.appendChild(item);
         empty.textAlign = "center";
         empty.style.fontSize = 125 + "%";
         listingEl.appendChild(empty);
-
-//Hide the filter input
-        // filterEl.parentNode.style.display = 'none';
-    }*/
-}
+    }
+  }
+  //add html with city list in city scape button
+  var cityscape = document.getElementById('cityscape');
+  cityscape.addEventListener('click', function(event){
+    var city_html = "";
+    var city_list = [];
+    json.features.forEach(function(feature){
+      // we want to know which options are selected in order to obtain count for programs per cities
+      var prop = feature.properties;
+      var lat = prop.lat;
+      var lon =  prop.lon;
+      var city =  prop.city;
+      var country = prop.coutry;
+      if (!city_html.includes(city)){
+        city_html += city;
+        city_list.push({"city":city, "country": country,"lon": lon, "lat": lat});
+      }
+     
+    });
+    //order alphabetically
+    city_list.sort(function(a, b) {
+      return (a.city < b.city) ? -1 : (a.city > b.city) ? 1 : 0;
+  });
+//again loop and populate list with ordered cities
+  city_html="";//"<fieldset><input id='feature-filter' type='text' placeholder='🔍 Search city' /></fieldset>";
+  city_list.forEach(function(feature){
+    programChecked = $('input[name=program]:checked').val(); 
+    statusChecked = $('input[name=status]:checked').val();
+    programChecked = (programChecked==="All") ? ["EMJD","EMJMD"] : (programChecked==="EMJMD") ? ["EMJMD"] : ["EMJD"];
+    statusChecked = (statusChecked === "All") ? [1,0] : (statusChecked === "1") ? [1] : [0];
+    var item = document.createElement('a');
+    item.innerHTML = '<div class = "city-hover" style ="display:inline;" id= "'+feature.lon+","+feature.lat+'"> ' + feature.city + '</div>' +
+    '<div style ="display:inline; margin-left: 5px; color: #5094e1;"><b>' + countProgramsPerCity(feature.city, programChecked, statusChecked) + '</b></div><br>';
+    city_html+=item.innerHTML;
+  })
+  
+    cityscape.innerHTML="<div class='mapboxgl-popup-content' style='width:150px;height:400px;top:15px;left:15px;'>"+city_html +"</div>";
+    //City mode - on click zoom fly to city and show red marker-doesn't work at the moment
+    
+      let city = event.target.textContent;
+      let coordinates = event.target.id.split(",");
+      if(city.length<100)
+      {
+        
+        map.flyTo({
+          center: coordinates,
+          zoom: 7
+        });
+        map.setFilter("point_animation", ["==", "city", city]);
+        map.setLayoutProperty('point_animation','visibility','visible');
+        map.setFilter("uni_icon",["==","city",city]);
+        map.setLayoutProperty("uni_icon",'visibility','visible');
+        map.setLayoutProperty('uni_icon','text-field',"");
+      }
+    
+  })
+  //when with mouse leave popup, empty html div
+  cityscape.addEventListener('mouseleave',function(){
+    cityscape.innerHTML="";
+  });
 
 
 // /*Start marker  animation.*/
@@ -616,7 +609,7 @@ var statusFilter;
 var programFilter;
 var statusChecked;
 var programChecked;
-var ff = document.getElementById('feature-filter');
+//var ff = document.getElementById('feature-filter');
 
 $('#program, #city, #radio1, #radio2, #radio3, #radio4, #radio5, #radio6, #interest-close').click(function(){
   programChecked = $('input[name=program]:checked').val(); 
@@ -674,7 +667,7 @@ $('#interest-close').on('click', function () {
   listingEl.innerHTML = '';
 /*show ema title*/
   $("#ema_title").show();
-  var ff = document.getElementById('feature-filter');
+  //var ff = document.getElementById('feature-filter');
   map.setLayoutProperty('uni', 'visibility', 'visible');
   map.setLayoutProperty('uni_select', 'visibility', 'none');
   map.setLayoutProperty('uni_icon', 'visibility', 'none');
@@ -717,6 +710,8 @@ filterEl.addEventListener('keyup', function(e) {
          return feature.properties.code;
      })))
 });
+
+
 
 /*Call this function on initialization
 passing an empty array to render an empty state*/
