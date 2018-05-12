@@ -1,0 +1,4 @@
+- remove program and city
+- initialize city mode on start
+- search by city, abbreviation and full name
+- figure out how to manage old and the same programs

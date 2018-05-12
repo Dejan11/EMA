@@ -23,8 +23,9 @@ $(document).ready(function(){
             $("#about").attr("style", "display:none");
   });
 
+  /*
   $("#banner").show();
-   /*splash page fade in/out*/
+   //splash page fade in/out
 
   $.fn.center = function () {
     this.css("position","absolute");
@@ -46,6 +47,7 @@ $(document).ready(function(){
   setTimeout(function(){
     $("#ema_title").fadeIn();
   }, 1500);
+  */
 });
 
 // creating animateMarker function 
@@ -256,9 +258,7 @@ function addDataLayer(){
       "text-halo-width": 1
     }
   });
-
-
-
+  
 }
 
 
@@ -340,18 +340,21 @@ var popup = new mapboxgl.Popup({
     closeOnClick: true,
     anchor: 'top-left'
 });
+//user input
 var filterEl = document.getElementById('feature-filter');
+//feature in listing
 var listingEl = document.getElementById('feature-listing');
 
 
 function renderListings(features) {
 /*Clear any existing listings*/
     listingEl.innerHTML = '';
-    var city = document.getElementById('city');
-    var program = document.getElementById('program');
+    //var city = document.getElementById('city');
+    //var program = document.getElementById('program');
     
-    if (features.length && program.className === 'mode-selected' ) {
-        features.forEach(function(feature) {
+    //if (features.length && program.className === 'mode-selected' ) {
+      if (features.length  ) {
+    features.forEach(function(feature) {
             var prop = feature.properties;
             var xmin = prop.xmin-1;
             var ymin = prop.ymin-1;
@@ -363,7 +366,6 @@ function renderListings(features) {
             var ongoing = prop.ongoing2015_2017;
      
 /*Content of the listing*/
-
             item.target = '_blank';
             item.innerHTML = '<div style ="display:inline;">   ' + prop.code + ' </div>' 
             + "  " + '<div style ="display:inline; margin-left: 5px; opacity: 0.6; color:' +  colored(status) + ';"><i>' + hideNulls(status) + '</i></div>' 
@@ -430,8 +432,8 @@ function renderListings(features) {
 /*Show the filter input*/
     filterEl.parentNode.style.display = 'block';
     filterEl.parentNode.style.color = 'rgb(117,117,117)';
-    } else if (features.length && city.className === 'mode-selected' ) {
-// we want to know wich options are selected in order to obtain count for programs per cities
+    } /*else if (features.length && city.className === 'mode-selected' ) {
+// we want to know which options are selected in order to obtain count for programs per cities
         programChecked = $('input[name=program]:checked').val(); 
         statusChecked = $('input[name=status]:checked').val();
         programChecked = (programChecked==="All") ? ["EMJD","EMJMD"] : (programChecked==="EMJMD") ? ["EMJMD"] : ["EMJD"];
@@ -442,11 +444,11 @@ function renderListings(features) {
             var lat = prop.lat;
             var lon =  prop.lon;
             var city =  prop.city;
-            var cat =  prop.cat;
-            var ongoing = prop.ongoing2015_2017;
+            //var cat =  prop.cat;
+            //var ongoing = prop.ongoing2015_2017;
             // console.log(city, cat, ongoing);
             var item = document.createElement('a');
-            item.target = '_blank';
+            //item.target = '_blank';
             item.innerHTML = '<div style ="display:inline;">' + city + '</div>' +
                               '<div style ="display:inline; margin-left: 5px; color: #5094e1;"><b>' + countProgramsPerCity(city, programChecked, statusChecked) + '</b></div>';
 
@@ -455,7 +457,7 @@ function renderListings(features) {
               map.setFilter("uni_select",["==","city",city]);
               map.setLayoutProperty("uni_select",'visibility','visible');
             });
-/*City mode - on click zoom fly to city and show red marker*/
+//City mode - on click zoom fly to city and show red marker
             item.addEventListener('click', function(){
               map.flyTo({
                 center: [lon, lat],
@@ -468,17 +470,17 @@ function renderListings(features) {
               map.setLayoutProperty('uni_icon','text-field',"");
 
             });
-/* City mode - adding city into listing that are in the map view */
+// City mode - adding city into listing that are in the map view 
             item.addEventListener('mouseout', function() {
             map.setLayoutProperty("uni_select", 'visibility', 'none');
 });
             
-/*City mode - populate listings after mouseover, click or mouseout were met*/
+//City mode - populate listings after mouseover, click or mouseout were met
 listingEl.appendChild(item);
 
 }); 
         
-/*Show the filter input*/
+//Show the filter input
         filterEl.parentNode.style.display = 'block';
 
     } else {
@@ -510,9 +512,9 @@ listingEl.appendChild(item);
         empty.style.fontSize = 125 + "%";
         listingEl.appendChild(empty);
 
-/*Hide the filter input*/
+//Hide the filter input
         // filterEl.parentNode.style.display = 'none';
-  }
+    }*/
 }
 
 
@@ -544,21 +546,20 @@ map.on('load', function () {
           var xmax = features[0].properties.xmax;
           var ymax = features[0].properties.ymax;
           map.fitBounds([[ xmin, ymin], [xmax, ymax]]);
-          console.log(features[0].properties.code +";"+ xmin +";"+ ymin +";"+ xmax +";"+ ymax );
      }
   });
 
 var layerList = document.getElementById('menu');
 var inputs = layerList.getElementsByTagName('input');
-program.className = 'mode-selected';
-var city = document.getElementById('city');
-city.className = 'mode';
+//program.className = 'mode-selected';
+//var city = document.getElementById('city');
+//city.className = 'mode';
 
 function switchLayer(layer) {
     var layerId = layer.target.id;
     var color_layer = document.getElementById('changeLayer');
     var color_menu = document.getElementById('menu');
-    var program = document.getElementById('program');
+   // var program = document.getElementById('program');
   if (layerId === "dark"){
 /*file path*/
     map.setStyle('mapbox://styles/geomundus/cj4k9343e2zk92rmi9cq8kzoh');
@@ -645,19 +646,20 @@ $('#program, #city, #radio1, #radio2, #radio3, #radio4, #radio5, #radio6, #inter
   map.setLayoutProperty('point_animation', 'visibility', 'none');
 
 });
+/*
 $('#city').click(function(){
   $("#program").attr('class','mode');
   $("#city").attr('class','mode-selected');
-  ff.placeholder = '🔍 Search results typing city name';
+  ff.placeholder = '🔍Search results typing city name';
   populateListing("city",100);
 });
 $('#program').click(function(){
   $("#program").attr('class', 'mode-selected');
   $("#city").attr('class','mode');
-  ff.placeholder = '🔍  Search results typing program or key word';
+  ff.placeholder = '🔍Search results typing program or key word';
   populateListing("code",100);
 });
-
+*/
 // on click zoom all extent
 document.getElementById('zoom-all').addEventListener('click', function () {
   map.flyTo({
@@ -689,12 +691,12 @@ $('#interest-close').on('click', function () {
 });
 
 map.on('moveend', function() {
-// depending on active status or program button we are filtering accrodingly
-     if ($('#program').hasClass('mode-selected')){
+// depending on active status or program button we are filtering accordingly
+    // if ($('#program').hasClass('mode-selected')){
         populateListing('code',100);
-      } else {
-        populateListing('city',100);
-      }
+    //  } else {
+        //populateListing('city',100);
+    //  }
  });
 
 filterEl.addEventListener('keyup', function(e) {
@@ -703,8 +705,8 @@ filterEl.addEventListener('keyup', function(e) {
      var filtered = programs.filter(function(feature) {
          var name = normalize(feature.properties.title);
          var code = normalize(feature.properties.code);
-         var city = normalize(feature.properties.city);
-         return name.indexOf(value) > -1 || code.indexOf(value) > -1 || city.indexOf(value) > -1;
+         //var city = normalize(feature.properties.city);
+         return name.indexOf(value) > -1 || code.indexOf(value) > -1;// || city.indexOf(value) > -1;
      });
 
 /*Populate the sidebar with filtered results*/
@@ -721,11 +723,11 @@ passing an empty array to render an empty state*/
  renderListings([]);
 
   map.on('mousemove', function(e) {
-      var program = document.getElementById('program');
+      //var program = document.getElementById('program');
       var country = document.getElementById('country');
-      var city = document.getElementById('city');
+      //var city = document.getElementById('city');
 
-  if (program.className === "mode-selected"){
+  //if (program.className === "mode-selected"){
       var features = map.queryRenderedFeatures(e.point, {
           layers: ['uni_icon', 'uni']
       });
@@ -741,7 +743,7 @@ passing an empty array to render an empty state*/
       
 /*Populate the popup and set its coordinates
 based on the feature found.*/
-
+      /*
       if (visibility === "none"){
         popup.setLngLat(feature.geometry.coordinates)
             .setHTML('<div><b>' + feature.properties.title + '</div></b><div><i>' + feature.properties.uni
@@ -753,20 +755,20 @@ based on the feature found.*/
               .setHTML('<div><b>' + feature.properties.city  + ', ' + feature.properties.country + '</b></div>')
               .addTo(map);
         }
-
-  } else if (city.className === "mode-selected") {
-    var features = map.queryRenderedFeatures(e.point, {
-        layers: ['uni_icon', 'uni']
-    });
+        */
+  //} else if (city.className === "mode-selected") {
+    //var features = map.queryRenderedFeatures(e.point, {
+     //   layers: ['uni_icon', 'uni']
+    //});
 /*Change the cursor style as a UI indicator.*/
-    map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+    //map.getCanvas().style.cursor = features.length ? 'pointer' : '';
 
-    if (!features.length) {
-        popup.remove();
-        return;
-    }
+    //if (!features.length) {
+    //    popup.remove();
+    //    return;
+    //}
 
-    var feature = features[0];
+    //var feature = features[0];
 
     let html="";
     let status;
@@ -794,9 +796,16 @@ based on the feature found.*/
     popup.setLngLat(feature.geometry.coordinates)
           .setHTML(html)
           .addTo(map);
-    } else {
-      console.log("error bei city or program selection");
-      }
+//} else 
+    if (visibility === "none"){
+        popup.setLngLat(feature.geometry.coordinates)
+            .setHTML('<div><b>' + feature.properties.title + '</div></b><div><i>' + feature.properties.uni
+            +  '</div></b><div>' + feature.properties.city + ', ' + feature.properties.country + '</div><div><a href="' + feature.properties.website + '" target="_blank">website</a></div>')
+            .addTo(map);
+
+        //} else { 
+        //    console.log("de nada");
+      }  
   });
 });
 
