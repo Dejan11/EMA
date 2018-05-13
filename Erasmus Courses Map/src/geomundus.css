@@ -731,15 +731,17 @@ display: none;
 
 @media screen and (max-width: 480px) {
   
+  #changeLayer{
+    display: none;
+  }
+  
   #survey{
     visibility: hidden;
   }
   #cr{
     visibility: hidden;
   }
-  #city-search{
-    visibility: hidden;
-  }
+
 
   #interest {
     position: fixed;
@@ -888,6 +890,7 @@ display: none;
 
 
   .mapboxgl-ctrl-attrib { display: none}
+  button.mapboxgl-ctrl-icon { display: none}
 
    .dropdown-content {
     padding: 3px 4px;
@@ -933,22 +936,24 @@ display: none;
   }
 }
 @media screen and (max-width: 1000px) {
-  #survey{
+  /*#survey{
     background-size: 26px 26px;
     border-radius: 5px;
     top: 130px;
     left: 2%;
     height: 26px;
     width: 26px; 
-  }
-  #cr{
+  }*/
+  #survey{display: none;}
+  /*#cr{
     background-size: 26px 26px;
     border-radius: 15px;
     top: 160px;
     left: 2%;
     height: 26px;
     width: 26px; 
-  }
+  }*/
+  #cr{display: none;}
   #interest {
     position: fixed;
     bottom:0;
@@ -961,7 +966,7 @@ display: none;
     overflow: auto;
   }
   #menu{
-    top: 10px;
+    top: 130px;
     left: 50px;
   }
 
@@ -998,7 +1003,7 @@ display: none;
 
   #changeLayer {
     background-size: 26px 26px;
-    top: 10px;
+    top: 130px;
     left: 2%;
     width: 26px;
     height: 26px;
@@ -1018,7 +1023,7 @@ display: none;
     height: 26px;
   }
   #city-search{
-    top: 190px;
+    top: 10px;
     left: 2%;
     height: 200px;
   }
