@@ -741,7 +741,9 @@ display: none;
   #cr{
     visibility: hidden;
   }
-
+  #city-search{
+    display: none;
+  }
 
   #interest {
     position: fixed;
@@ -1025,7 +1027,8 @@ display: none;
   #city-search{
     top: 10px;
     left: 2%;
-    height: 200px;
+    height: 10px;
+    height: 100px;
   }
   #cityscape{
     background-size: 15px 15px;
