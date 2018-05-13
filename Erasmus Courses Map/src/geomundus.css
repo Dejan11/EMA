@@ -70,17 +70,15 @@ body {
 }
 
 .prg:hover > label {
-background: #f1f1f1;
-  /*border:1px solid blue;*/
-  /*border-radius: 5px;*/
+  background: #f1f1f1;
 }
 
 .prg > label {
-/*background: #f9f9f9;*/
-cursor: pointer;
-width: 100%;
-height: 100%;
-display: block;
+
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 
@@ -105,31 +103,31 @@ height: 100%;*/
 
 
 #program_title{
-position: absolute;
-z-index: 2;
-/*background: rgba(243,123,33, 1);*/
-background-color: rgba(0, 128, 225, 1);
-/*rgba(12, 12, 12, 0.89);*/
-border-style: solid;
-border-color: #fff;
-/*rgba(0, 128, 225, 1);*/
-/*rgba(243,123,33, 1);*/
-color: #fff;
-font-weight: 600;
-font-size: 18px;
-display: none;
-left: 50%;
-width: auto;
-top:1%;
-/*bottom: 1%;*/
-text-align: center;
-padding: 5px 10px;
-border-radius: 10px;
--webkit-transform: translateX(-50%);
- -moz-transform: translateX(-50%);
- -ms-transform: translateX(-50%);
- -o-transform: translateX(-50%);
- transform: translateX(-50%);
+  position: absolute;
+  z-index: 2;
+  /*background: rgba(243,123,33, 1);*/
+  background-color: rgba(0, 128, 225, 1);
+  /*rgba(12, 12, 12, 0.89);*/
+  border-style: solid;
+  border-color: #fff;
+  /*rgba(0, 128, 225, 1);*/
+  /*rgba(243,123,33, 1);*/
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+  display: none;
+  left: 50%;
+  width: auto;
+  top:1%;
+  /*bottom: 1%;*/
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 
@@ -152,22 +150,22 @@ padding-top: 5%;
 }
 
 #interest-close {
-right: 0px;
-margin-top: 20px;
-margin-right: 20px;
-margin-left: 10px;
-/* float: right; */
-top: 0px;
-width: 38px;
-height: 38px;
-border-radius: 19px;
-background-image: url('https://geomundus.github.io/back-button.svg');
-background-size: 38px 38px;
-background-repeat: no-repeat;
-cursor: pointer;
-opacity: 0.7;
-font-size: 13px;
-display:inline-block;
+  right: 0px;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 10px;
+  /* float: right; */
+  top: 0px;
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  background-image: url('https://geomundus.github.io/back-button.svg');
+  background-size: 38px 38px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 13px;
+  display:inline-block;
 }
 
 #interest-close:hover {
@@ -234,7 +232,7 @@ border-radius: 5px;
 }
 
 #about-map-button:hover {
-background: #F3904F;
+  background: #F3904F;
 }
 
 #about-credits {
@@ -315,7 +313,7 @@ max-height: 100%;
 display: block;
 position: absolute;
 z-index: 2;
-top: 2.3%;
+top: 60px;
 left: 29%;
 height: auto;
 padding: 7px;
@@ -340,6 +338,8 @@ opacity: 1;
 transition-delay: 0s;
 visibility: visible;
 }
+
+
 #changeLayer{
 background-image:url('https://geomundus.github.io/changeLayers.png');
 background-size: 35px 35px;
@@ -354,6 +354,7 @@ height: 35px;
 width: 35px;
 opacity: 0.7;
 }
+
 #zoom-all:hover{
 cursor: pointer;
 opacity: 1;
@@ -437,7 +438,7 @@ opacity: 0.7;
 }
 #cityscape{
   background-image:url('https://geomundus.github.io/cityscape.png');
-  background-size: 35px 35px;
+  background-size: 26px 26px;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
@@ -445,11 +446,37 @@ opacity: 0.7;
   border: 2px solid rgb(0, 0, 0,.9);
   z-index: 2;
   border-radius: 20px;
-  top: 260px;
-  left: 26%;
+  /*top: 260px;
+  left: 26%;*/
   height: 35px;
   width: 35px;
   opacity: 0.7;
+}
+#city-search{
+  position: absolute;
+  top: 260px;
+  left: 26%;
+  width: 300px;
+  height: 400px,
+}
+#input-city{
+  position: absolute;
+  /*top: 262px;*/
+  left: 50px;
+  z-index: 3;
+}
+#filter-city{
+  background-image: url('/src/searchicon.png');
+  background-position: 5px 6px;
+  background-repeat: no-repeat;
+  width: 170px;
+  padding: 6px 10px 6px 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;    
+  color: grey;
+  font: bold 12px Arial,Helvetica,Sans-serif;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 #map {
@@ -710,13 +737,15 @@ display: none;
   #cr{
     visibility: hidden;
   }
+  #city-search{
+    visibility: hidden;
+  }
 
   #interest {
     position: fixed;
     bottom:0;
     z-index: 99;
     font-size: calc(7px + .5vw);
-    background: rgba(0, 0, 0, 0.98);
     width: 100%;
     height: 50vh;
     display: none;
@@ -735,24 +764,17 @@ display: none;
     z-index: 1012022;
     top: 0px;
     line-height: 50px;
-    background: rgba(12, 12, 12, 0.8);
-    color: #eee;
     display: inline;
   }
 
   #about-linked{
-    background-image:url('https://geomundus.github.io/info.svg');
-    background-size: 26px 26px;
-    background-repeat: no-repeat;
-    position: absolute;
-    background-color: rgba(24, 24, 24, 0.0);
+  background-size: 26px 26px;
     z-index: 10;
     border-radius: 5px;
     top: 70px;
     left: 2%;
     height: 26px;
     width: 26px;
-    opacity: 0.7;
   }
 
   .mode, .mode-selected {
@@ -783,16 +805,6 @@ display: none;
     font-family: 'Open Sans', sans-serif;
     padding: 2px 5px;
   }
-    .mode-selected {
-      background: rgba(0, 128, 225, 1);
-    }
-
-    .mode-selected:hover{
-      background: rgba(0, 90, 225, .9);
-    }
-    .mode:hover{
-      background: rgba(70, 70, 70, 1);
-    }
   #map {
     position: relative!important;
     width: 100%;
@@ -801,9 +813,7 @@ display: none;
     left: 0;
   }
 
-  #changeLayer {
-    display: none
-  }
+
 
   #zoom-all{
     background-size: 26px 26px;
@@ -827,6 +837,10 @@ display: none;
   #ema_title {
    visibility: hidden;
  }
+ #menu{
+   top: 10px;
+   left: 50px;
+ }
 
   .map-overlay {
     position: relative;
@@ -834,7 +848,6 @@ display: none;
       top: 0;
       height: 50vh;
       font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      background-color: rgba(12, 12, 12, 0.7);
       overflow: hidden;
 
 }
@@ -849,21 +862,13 @@ display: none;
   }
 
   .map-overlay input {
-      display: block;
-      z-index: 2;
-      border: none;
-      width: 100%;
-      border-radius: 3px;
-      background: rgba(12, 12, 12, 0.7);
-      padding: 0px;
-      margin-top: 2px;
-      font-size: 16px;
+    margin-top: 1px;
+    padding: 5px;  
   }
-
   .map-overlay .listing {
       overflow: auto;
       overflow-x: hidden;
-
+      max-height: 100%;
   }
 
   .map-overlay .listing > * {
@@ -874,9 +879,6 @@ display: none;
   }
 
   .map-overlay .listing a {
-      border-bottom: 1px solid rgba(2, 70, 0, 0.5);
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(12, 12, 12, 0.7);
       text-decoration: none;
   }
 
@@ -884,9 +886,6 @@ display: none;
       border: none;
   }
 
-  .map-overlay .listing a:hover {
-      background: rgba(0, 128, 225, 0.3);
-  }
 
   .mapboxgl-ctrl-attrib { display: none}
 
@@ -920,26 +919,10 @@ display: none;
     display: inline-block;
     font-weight: 600;
     padding: 10px;
-    background: #06c;
-    cursor: pointer;
     border-radius: 5px;
 
   }
-  #about-map-button:hover {
-    background: #0cf;
-  }
 
-  #about-credits {
-    font-size: 13px;
-  }
-
-  #about-text{
-    color: rgba(250, 250, 250, 0.88);
-  }
-
-  #about-text a {
-    color: #08f!important;
-  }
   .mapboxgl-popup {
 
   max-width: 150px;
@@ -971,11 +954,15 @@ display: none;
     bottom:0;
     z-index: 99;
     font-size: calc(7px + .5vw);
-    background: rgba(0, 0, 0, 0.98);
+    /*background: rgba(0, 0, 0, 0.98);*/
     width: 100%;
     height: 50vh;
     display: none;
     overflow: auto;
+  }
+  #menu{
+    top: 10px;
+    left: 50px;
   }
 
   .desktop {
@@ -991,7 +978,7 @@ display: none;
     background-size: 26px 26px;
     background-repeat: no-repeat;
     position: absolute;
-    background-color: rgba(24, 24, 24, 0.0);
+    /*background-color: rgba(24, 24, 24, 0.0);*/
     z-index: 10;
     border-radius: 5px;
     top: 100px;
@@ -1030,13 +1017,22 @@ display: none;
     width: 26px;
     height: 26px;
   }
-
-
+  #city-search{
+    top: 190px;
+    left: 2%;
+    height: 200px;
+  }
+  #cityscape{
+    background-size: 15px 15px;
+    height: 26px;
+    width: 26px;
+ }
   #banner{
     width: 500px;
     left: 200px;
     top: 100px;
   }
+  
 
   #ema_title {
    visibility: hidden;
@@ -1048,7 +1044,6 @@ display: none;
       top: 0;
       height: 50vh;
       font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      background-color: rgba(12, 12, 12, 0.7);
       overflow: hidden;
 
 }
@@ -1062,21 +1057,10 @@ display: none;
     font-size: 12px;
   }
 
-  .map-overlay input {
-      display: block;
-      z-index: 2;
-      border: none;
-      width: 100%;
-      border-radius: 3px;
-      background: rgba(12, 12, 12, 0.7);
-      padding: 0px;
-      margin-top: 2px;
-      font-size: 16px;
-  }
-
   .map-overlay .listing {
       overflow: auto;
       overflow-x: hidden;
+      max-height: 64%;
 
   }
 
@@ -1088,18 +1072,14 @@ display: none;
   }
 
   .map-overlay .listing a {
-      border-bottom: 1px solid rgba(2, 70, 0, 0.5);
+      /*border-bottom: 1px solid rgba(2, 70, 0, 0.5);
       color: rgba(255, 255, 255, 0.9);
-      background: rgba(12, 12, 12, 0.7);
+      background: rgba(12, 12, 12, 0.7);*/
       text-decoration: none;
   }
 
   .map-overlay .listing a:last-child {
       border: none;
-  }
-
-  .map-overlay .listing a:hover {
-      background: rgba(0, 128, 225, 0.3);
   }
 
   .mapboxgl-ctrl-attrib { display: none}
@@ -1139,20 +1119,9 @@ display: none;
     border-radius: 5px;
 
   }
-  #about-map-button:hover {
-    background: #0cf;
-  }
 
   #about-credits {
     font-size: 13px;
-  }
-
-  #about-text{
-    color: rgba(250, 250, 250, 0.88);
-  }
-
-  #about-text a {
-    color: #08f!important;
   }
   .mapboxgl-popup {
 

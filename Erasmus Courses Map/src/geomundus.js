@@ -453,8 +453,14 @@ function renderListings(features) {
   //add html with city list in city scape button
   var cityscape = document.getElementById('cityscape');
   cityscape.addEventListener('click', function(event){
+    $('#input-city').css('display','block');
     var city_html = "";
     var city_list = [];
+    programChecked = $('input[name=program]:checked').val(); 
+    statusChecked = $('input[name=status]:checked').val();
+    programChecked = (programChecked==="All") ? ["EMJD","EMJMD"] : (programChecked==="EMJMD") ? ["EMJMD"] : ["EMJD"];
+    statusChecked = (statusChecked === "All") ? [1,0] : (statusChecked === "1") ? [1] : [0];
+
     json.features.forEach(function(feature){
       // we want to know which options are selected in order to obtain count for programs per cities
       var prop = feature.properties;
@@ -462,7 +468,8 @@ function renderListings(features) {
       var lon =  prop.lon;
       var city =  prop.city;
       var country = prop.coutry;
-      if (!city_html.includes(city)){
+      //avoid double and cities with 0
+      if (!city_html.includes(city) && countProgramsPerCity(city, programChecked, statusChecked)>0){
         city_html += city;
         city_list.push({"city":city, "country": country,"lon": lon, "lat": lat});
       }
@@ -472,27 +479,23 @@ function renderListings(features) {
     city_list.sort(function(a, b) {
       return (a.city < b.city) ? -1 : (a.city > b.city) ? 1 : 0;
   });
-//again loop and populate list with ordered cities
-  city_html="";//"<fieldset><input id='feature-filter' type='text' placeholder='🔍 Search city' /></fieldset>";
+//again loop and populate list with ordered cities, added search engine
+  city_html="";
   city_list.forEach(function(feature){
-    programChecked = $('input[name=program]:checked').val(); 
-    statusChecked = $('input[name=status]:checked').val();
-    programChecked = (programChecked==="All") ? ["EMJD","EMJMD"] : (programChecked==="EMJMD") ? ["EMJMD"] : ["EMJD"];
-    statusChecked = (statusChecked === "All") ? [1,0] : (statusChecked === "1") ? [1] : [0];
-    var item = document.createElement('a');
-    item.innerHTML = '<div class = "city-hover" style ="display:inline;" id= "'+feature.lon+","+feature.lat+'"> ' + feature.city + '</div>' +
-    '<div style ="display:inline; margin-left: 5px; color: #5094e1;"><b>' + countProgramsPerCity(feature.city, programChecked, statusChecked) + '</b></div><br>';
+     var item = document.createElement('a');
+    item.innerHTML = '<li><div class = "city-hover" style ="display:inline;" id= "'+feature.lon+","+feature.lat+'"> ' + feature.city + '&nbsp<span style="color:#5094e1;font-weight:bold">'+ countProgramsPerCity(feature.city, programChecked, statusChecked) +'</span></div></li>';
     city_html+=item.innerHTML;
   })
   
-    cityscape.innerHTML="<div class='mapboxgl-popup-content' style='width:150px;height:400px;top:15px;left:15px;'>"+city_html +"</div>";
-    //City mode - on click zoom fly to city and show red marker-doesn't work at the moment
+    cityscape.innerHTML="<div style='width:250px;height:400px;'>" +
+    "<div class='mapboxgl-popup-content' style='width:170px;height:400px;top:30px;left:50px;z-index:2;border-top-left-radius:0px;border-top-right-radius:0px'>"+
+    "<ul id='city-list' style='list-style:none;padding-left: 0;'>"+ city_html +"</ul></div></div>";
     
+    //City mode - on click zoom fly to city and show red marker-doesn't work at the moment
       let city = event.target.textContent;
       let coordinates = event.target.id.split(",");
-      if(city.length<100)
+      if(city.length<100 && city.length>0)
       {
-        
         map.flyTo({
           center: coordinates,
           zoom: 7
@@ -503,13 +506,32 @@ function renderListings(features) {
         map.setLayoutProperty("uni_icon",'visibility','visible');
         map.setLayoutProperty('uni_icon','text-field',"");
       }
-    
-  })
-  //when with mouse leave popup, empty html div
-  cityscape.addEventListener('mouseleave',function(){
-    cityscape.innerHTML="";
-  });
 
+  })
+  //function for search engine
+  function filterCity() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("filter-city");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("city-list");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("div")[0];
+        console.log(a);
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+  //when with mouse leave popup, empty html div
+var city_box = document.getElementById('city-search');
+city_box.addEventListener('mouseleave',function(){
+    cityscape.innerHTML="";
+    $('#input-city').css('display','none');
+  });
 
 // /*Start marker  animation.*/
 animateMarker();
@@ -581,7 +603,7 @@ for (var i = 0; i < inputs.length; i++) {
     inputs[i].onclick = switchLayer;
 }
 
-//function that fultfills feature listing
+//function that fills feature listing
 var delayMillis = 100;
 function populateListing(column, delayMillis){
   setTimeout(function() {
@@ -611,7 +633,7 @@ var statusChecked;
 var programChecked;
 //var ff = document.getElementById('feature-filter');
 
-$('#program, #city, #radio1, #radio2, #radio3, #radio4, #radio5, #radio6, #interest-close').click(function(){
+$('#radio1, #radio2, #radio3, #radio4, #radio5, #radio6, #interest-close').click(function(){
   programChecked = $('input[name=program]:checked').val(); 
   statusChecked = $('input[name=status]:checked').val();
 
